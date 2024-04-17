@@ -2,11 +2,20 @@
   "name": "chaiandbackend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon src/index.js"
   },
-  "keywords": ["js","backend","chai"],
+  "keywords": [
+    "js",
+    "backend",
+    "chai"
+  ],
   "author": "vivek tondare",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
