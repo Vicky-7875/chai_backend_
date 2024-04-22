@@ -37,7 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // 1
   const { username, fullname, email, password } = req.body;
-  console.log(username, fullname, email, password);
+  // console.log(username, fullname, email, password);
   //for beiginer
   // if (fullname === "") {
   //   throw new ApiError(400, "fullname is required");
@@ -54,7 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (existedUser) {
     throw new ApiError(409, "User with email or username already exists");
   }
-  console.log(req.body);
+  // console.log(req.body);
   const avatarLocalPath = req.files?.avatar[0]?.path;
   const coverImangeLocalPath = req.files?.coverImage[0]?.path;
 
@@ -98,7 +98,7 @@ const loginUser = asyncHandler(async (req, res) => {
   //send cookie
 
   const { email, username, password } = req.body;
-  console.log(email);
+  // console.log(email);
 
   if (!username && !email) {
     throw new ApiError(400, "username or email is required");
@@ -185,7 +185,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       req.cookies.refreshToken || req.body.refreshToken;
 
     if (!incomingRefreshToken) {
-      throw new ApiError(401, "Unauthorized requret");
+      throw new ApiError(401, "Unauthorized request");
     }
     const decodedToken = jwt.verify(
       incomingRefreshToken,
@@ -242,13 +242,15 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password change successfully"));
 });
 
-const getCurrentUser = asyncHandler((req, res) => {
+const getCurrentUser = asyncHandler(async (req, res) => {
+  // console.log(req)
   return res
     .status(200)
     .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
+  // console.log(req.body);
   const { fullname, email } = req.body;
   if (!fullname || !email) {
     throw new ApiError(400, "All fields are required");
@@ -316,7 +318,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "Update avatar image successfully"));
+    .json(new ApiResponse(200, user, "Update cover image successfully"));
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
@@ -455,5 +457,5 @@ export {
   updateUserAvatar,
   updateUserCoverImage,
   getUserChannelProfile,
-  getWatchHistory
+  getWatchHistory,
 };
